@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Exam Performance</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f7f9fb;
+      }
+      .card-form {
+        max-width: 900px;
+        margin: 2.5rem auto;
+      }
+      .card-header {
+        background: linear-gradient(90deg, #0d6efd, #6610f2);
+        color: #fff;
+      }
+      .result {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card card-form shadow-sm">
+        <div class="card-header py-3">
+          <h3 class="mb-0">Student Exam Performance Prediction</h3>
+          <small
+            >Provide student details and previous scores to estimate the maths
+            score.</small
+          >
+        </div>
+        <div class="card-body">
+          <form action="{{ url_for('predict') }}" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Gender</label>
+                <select class="form-select" name="gender" required>
+                  <option selected disabled value="">Select your Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Race / Ethnicity</label>
+                <select class="form-select" name="race_ethnicity" required>
+                  <option selected disabled value="">Select Ethnicity</option>
+                  <option value="group A">Group A</option>
+                  <option value="group B">Group B</option>
+                  <option value="group C">Group C</option>
+                  <option value="group D">Group D</option>
+                  <option value="group E">Group E</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Parental Level of Education</label>
+                <select
+                  class="form-select"
+                  name="parental_level_of_education"
+                  required
+                >
+                  <option selected disabled value="">
+                    Select Parent Education
+                  </option>
+                  <option value="associate's degree">associate's degree</option>
+                  <option value="bachelor's degree">bachelor's degree</option>
+                  <option value="high school">high school</option>
+                  <option value="master's degree">master's degree</option>
+                  <option value="some college">some college</option>
+                  <option value="some high school">some high school</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Lunch Type</label>
+                <select class="form-select" name="lunch" required>
+                  <option selected disabled value="">Select Lunch Type</option>
+                  <option value="free/reduced">free/reduced</option>
+                  <option value="standard">standard</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Test Preparation Course</label>
+                <select
+                  class="form-select"
+                  name="test_preparation_course"
+                  required
+                >
+                  <option selected disabled value="">Select Test Course</option>
+                  <option value="none">None</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label">Reading Score (0-100)</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  name="reading_score"
+                  min="0"
+                  max="100"
+                  placeholder="Reading"
+                  required
+                />
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label">Writing Score (0-100)</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  name="writing_score"
+                  min="0"
+                  max="100"
+                  placeholder="Writing"
+                  required
+                />
+              </div>
+
+              <div class="col-md-6 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  Predict Maths Score
+                </button>
+              </div>
+            </div>
+          </form>
+
+          {% if prediction_text is defined and prediction_text %}
+          <div class="alert alert-info result" role="alert">
+            {{ prediction_text }}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
