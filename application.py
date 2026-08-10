@@ -1,3 +1,5 @@
+# Trigger deployment
+
 from flask import Flask, app, request, jsonify, render_template
 import pandas as pd
 import numpy as np
